@@ -2,8 +2,6 @@
 <aiml>
 <!– EN COURS D EDITION PAR LECAGNOIS –>
 <!– MODIFICATIONS EFFECTUEES PAR LECAGNOIS–>
-<!--  -->
-<!--  -->
 <category><pattern>ZIP *</pattern>
 <template><srai>SHUT <star/></srai></template>
 </category>
