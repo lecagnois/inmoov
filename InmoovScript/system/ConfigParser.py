@@ -11,6 +11,7 @@ def CheckFileExist(File):
 
 	
 CheckFileExist(RuningFolder + 'Inmoov')
+LaunchSwingGui=True
 try:
 	#basic config parse
 	BasicConfig = ConfigParser.ConfigParser(allow_no_value = True)
@@ -28,6 +29,7 @@ try:
 	ScriptType=BasicConfig.get('MAIN', 'ScriptType')
 	MyRightPort=BasicConfig.get('ARDUINO', 'MyRightPort')
 	MyLeftPort=BasicConfig.get('ARDUINO', 'MyLeftPort')
+	ForceArduinoIsConnected=BasicConfig.getboolean('ARDUINO', 'ForceArduinoIsConnected')
 	#read personnal config
 
 	MyvoiceTTS=BasicConfig.get('TTS', 'MyvoiceTTS')
@@ -39,6 +41,9 @@ try:
 	EarInterpretEngine=BasicConfig.get('VOCAL', 'EarInterpretEngine')
 	EarEngine=BasicConfig.get('VOCAL', 'EarEngine')
 	LoadingPicture=BasicConfig.getboolean('GENERAL', 'LoadingPicture')
+	StartupSound=BasicConfig.getboolean('GENERAL', 'StartupSound')
+	IuseLinux=BasicConfig.getboolean('GENERAL', 'IuseLinux')
+	LaunchSwingGui=BasicConfig.getboolean('GENERAL', 'LaunchSwingGui')
 
 
 except:

@@ -22,3 +22,16 @@ import csv
 import glob
 import ConfigParser
 import inspect
+########## modif JPM pour anniversaire
+import datetime
+import locale
+########## suplement pour mail 
+import smtplib
+from email import *
+from email.mime.multipart import *
+from email.mime.text import *
+from email import encoders
+from email.mime.base import *
+import imaplib
+import email
+import re
