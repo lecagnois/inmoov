@@ -2,11 +2,15 @@
 # 								INITIAL CHECKUP
 # ##############################################################################
 
-GUIService.dockPanel("python")
+################################
+# INIT.0
+################################
+
 print "MRL version : ",runtime.getVersion()[-4:]
 print "Inmoov version : ",version
 print "Starting..."
-DEBUG=0
+runtime.setLogLevel("WARN")
+
 
 ################################
 # INIT.1 - system dependencies
@@ -31,9 +35,7 @@ execfile(RuningFolder+'/system/Robot_Satus_GlobalsVars.py')
 # we load personal parameters
 execfile(RuningFolder+'/system/ConfigParser.py')
 
-i01.startEar()
-ear = i01.ear
-ear.pauseListening()
+
 
 # vocal errors
 execfile(RuningFolder+'/system/Errors.py'.encode('utf8'))
@@ -54,16 +56,14 @@ for filename in sorted(os.listdir(RuningFolder+'services')):
 	if os.path.splitext(filename)[1] == ".py":
 		execfile(RuningFolder+'services/'+filename.encode('utf8'))
 		print filename
-if boot_green:		
-	PlayNeopixelAnimation("Flash Random", 0, 255, 0, 1)
+
 
 
 ################################
 # INIT.4 - configuration and system health
 ################################
 #mrl version check
-if int(runtime.getVersion()[-4:])<int(mrlCompatible):
-	errorSpokenFunc('MrlNeedUpdate')
+if int(runtime.getVersion()[-4:])<int(mrlCompatible):errorSpokenFunc('MrlNeedUpdate')
 
 	
 ################################
@@ -71,51 +71,62 @@ if int(runtime.getVersion()[-4:])<int(mrlCompatible):
 ################################
 #we launch Inmoov Skeleton
 for filename in os.listdir(RuningFolder+'inmoovSkeleton'):		
-	if os.path.splitext(filename)[1] == ".py":
-		execfile(RuningFolder+'inmoovSkeleton/'+filename.encode('utf8'))
+	if os.path.splitext(filename)[1] == ".py":execfile(RuningFolder+'inmoovSkeleton/'+filename.encode('utf8'))
 
+################################
+# INIT.6 - ear.addcmmands
+################################
+#if chatbot loaded we do not load ear.addcommands
+if EarInterpretEngine!="chatbot":
+	for root, subdirs, files in os.walk(RuningFolder+'inmoovVocal/ear.addCommand'):
+		for name in files:
+			if name.split(".")[-1] == "py":
+				execfile(os.path.join(root, name).encode('utf8'))
+				if DEBUG==1:print "debug  ear.addcmmands : ",os.path.join(root, name)		
 
 
 ################################
-# INIT.6 - inmoov loading
+# INIT.7- inmoov loading
 ################################
 	
 #we launch Inmoov Gestures
-for filename in os.listdir(RuningFolder+'inmoovGestures'):		
-	if os.path.splitext(filename)[1] == ".py":
-		execfile(RuningFolder+'inmoovGestures/'+filename.encode('utf8'))
+for root, subdirs, files in os.walk(RuningFolder+'inmoovGestures'):
+	for name in files:
+		if name.split(".")[-1] == "py":
+			execfile(os.path.join(root, name))
+			if DEBUG==1:print "debug inmoovGestures : ",os.path.join(root, name)
 		
 #we launch Inmoov life
-for filename in os.listdir(RuningFolder+'inmoovLife'):		
-	if os.path.splitext(filename)[1] == ".py":
-		execfile(RuningFolder+'inmoovLife/'+filename.encode('utf8'))
+for root, subdirs, files in os.walk(RuningFolder+'inmoovLife'):
+	for name in sorted(files):
+		if name.split(".")[-1] == "py":
+			execfile(os.path.join(root, name))
+			if DEBUG==1:print "debug inmoovLife : ",os.path.join(root, name)
 
 #create the custom script, only if not exist
-if not os.path.isfile(RuningFolder+'inmoovCustom/Inmoov_custom.py'):
-		shutil.move(RuningFolder+'inmoovCustom/Inmoov_custom.py.default',RuningFolder+'inmoovCustom/Inmoov_custom.py')
+if not os.path.isfile(RuningFolder+'inmoovCustom/Inmoov_custom.py'):shutil.move(RuningFolder+'inmoovCustom/Inmoov_custom.py.default',RuningFolder+'inmoovCustom/Inmoov_custom.py')
 
 
 ################################
-# INIT.7 - inmoov APPS
+# INIT.8 - inmoov APPS - TODO
 ################################
 
 #we launch Inmoov APPS - GAMES
 for root, subdirs, files in os.walk(RuningFolder+'inmoovAPPS'):
-	print files
 	for name in files:
 		if name.split(".")[-1] == "py":
 			execfile(os.path.join(root, name))
-			if DEBUG==1:
-				print "debug inmoovAPPS : ",os.path.join(root, name)
+			if DEBUG==1:print "debug inmoovAPPS : ",os.path.join(root, name)
 
-# here we go !
-talkEvent(lang_startingEar)
-#ImageDisplay.exitFS()
-#ImageDisplay.closeAll()
-talkEvent(lang_ready)
-WebkitSpeechRecognitionFix.startClock()
+################################
+# INIT.9 - reade to go
+################################
+#first init check
+
+sleepModeWakeUp()
 
 RobotIsStarted=1
+# mouvement tete en parlant 0 pour arreter dans global var
 
 
 
