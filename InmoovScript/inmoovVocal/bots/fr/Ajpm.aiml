@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+  <category>
+    <pattern>JARVIS</pattern>
+    <template>
+      <li>
+        <random>
+          <li>OUI , je vous écoute</li>
+          <li>A votre service , que pui-je faire pour vous</li>
+		   <li>OUI , </li>
+          <li>A vos ordres !</li>
+        </random>
+      </li>
+    </template>
+  </category>
+  
+  <category>
+    <pattern>ouvre la main *</pattern>
+    <template>
+      <think>
+        <set name="main"><star index="1" /></set>
+      </think>
+      <condition>
+        <li name="main" value="droite"><think><set name="main">right</set></think></li>
+        <li><think><set name="main">left</set></think></li>
+      </condition>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>fingeropen('<get name="main"/>')</param>
+        </mrl>
+      </oob>
+    </template>
+  </category> 
+
+  <category>
+    <pattern>ferme la main *</pattern>
+    <template>
+      <think>
+        <set name="main"><star index="1" /></set>
+      </think>
+      <condition>
+        <li name="main" value="droite"><think><set name="main">right</set></think></li>
+        <li><think><set name="main">left</set></think></li>
+      </condition>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>fingerclose('<get name="main"/>')</param>
+        </mrl>
+      </oob>
+     </template>
+  </category> 
+  
+   <category>
+    <pattern>compte</pattern>
+    <template>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>compte123()</param>
+        </mrl>
+      </oob>
+     </template>
+  </category> 
+   
+  
+   <category>
+    <pattern>regarde à droite</pattern>
+    <template>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>tetedroite()</param>
+        </mrl>
+      </oob>
+     </template>
+  </category>
+  <category><pattern>tête droite</pattern>
+	<template><srai>regarde à droite</srai></template>
+   </category>
+  
+  <category>
+    <pattern>regarde à gauche</pattern>
+    <template>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>tetegauche()</param>
+        </mrl>
+      </oob>
+     </template>
+  </category>  
+  <category><pattern>tête gauche</pattern>
+	<template><srai>regarde à gauche</srai></template>
+  </category>
+  
+  <category>
+    <pattern>regarde le ciel</pattern>
+    <template>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>ciel()</param>
+        </mrl>
+      </oob>
+     </template>
+  </category> 
+  
+   <category>
+    <pattern>exercices</pattern>
+    <template>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>gym()</param>
+        </mrl>
+      </oob>
+     </template>
+  </category>  
+  
+  <category>
+    <pattern>action</pattern>
+    <template>
+      <oob>
+        <mrl>
+          <service>python</service>
+          <method>exec</method>
+          <param>action()</param>
+        </mrl>
+      </oob>
+     </template>
+  </category>  
+  
+ <category>                   
+	<pattern># anniversaire #</pattern> 
+	<template>                  
+		<oob>                   
+			<mrl>             
+				<service>python</service>   
+				<method>exec</method>      
+				<param>anniversaire()</param>
+			</mrl>            
+		</oob>                 
+	</template>                 
+	</category>                 
+
+	<category><pattern>anniversaire de</pattern>
+	<template><srai>#anniversaire#<star/></srai></template>
+	</category> 
+
+	<category><pattern>fete de </pattern>
+	<template><srai>#anniversaire#<star/></srai></template>
+	</category>
+	
+	<category>                   
+	<pattern># allume #</pattern> 
+	<template>                  
+		<oob>                   
+			<mrl>             
+				<service>python</service>   
+				<method>exec</method>      
+				<param>allume("votre ordre est executer")</param>
+				                       
+				
+			</mrl>            
+		</oob>                 
+	</template>                 
+	</category>                 
+
+	<category><pattern>allume le salon</pattern>
+		<template><srai>#allume#<star/></srai></template>
+	</category> 
+	<category><pattern>allumer le salon</pattern>
+		<template><srai>#allume#<star/></srai></template>
+	</category> 
+	<category><pattern>allumer</pattern>
+		<template><srai>#allume#<star/></srai></template>
+	</category> 
+	<category><pattern>lumière</pattern>
+		<template><srai>#allume#<star/></srai></template>
+	</category>
+	
+	<category>                
+	<pattern># éteins #</pattern> 
+		<template>                   
+			<oob>                   
+				<mrl>                
+					<service>python</service>   
+					<method>exec</method>     
+					<param>eteins("votre ordre est executer")</param>
+				                       
+				</mrl>             
+			</oob>                   
+		</template>                 
+	</category>                 
+
+	<category><pattern>éteins le salon</pattern>
+		<template><srai>#éteins#<star/></srai></template>
+	</category> 
+	<category><pattern>éteindre *</pattern>
+		<template><srai>#éteins#<star/></srai></template>
+	</category> 
+	
+	<category>                  
+	<pattern># loto #</pattern> 
+	<template>                  
+		<oob>                 
+			<mrl>                
+				<service>python</service>   
+				<method>exec</method>      
+				<param>loto("Voci les numéros a jouer au loto, ","Le ","Et le numéro chance le, ","Je vous souhaite bonne chance, ")</param>
+			</mrl>              
+		</oob>                 
+	</template>                 
+	</category>   
+ 
+	<category>                  
+	<pattern> * une photo</pattern> 
+	<template>                  
+		<oob>                 
+			<mrl>                
+				<service>python</service>   
+				<method>exec</method>      
+				<param>photo("regarde moi bien dans les yeux")</param>
+			</mrl>              
+		</oob>                 
+	</template>                 
+	</category>   
+
+   <category>
+      <pattern>OUI</pattern>
+      <template>
+			<oob>
+				<mrl>
+				   <service>python</service>
+				   <method>exec</method>
+				   <param>photoui()</param>
+				 </mrl>
+			</oob>
+			
+   	</template>
+   </category>
+   
+	<category>
+      <pattern>ENVOYER UNE PHOTO À *</pattern>
+      <template>
+		<think><set name="destinataire"><star/></set></think>
+			<oob>
+				<mrl>
+				   <service>python</service>
+				   <method>exec</method>
+				   <param>photoa("<get name="destinataire"/>")</param>
+				 </mrl>
+			</oob>
+   	</template>
+    </category>
+	
+	<category>
+      <pattern># LES MESSAGES DE *</pattern>
+      <template>
+			<oob>
+				<mrl>
+				   <service>python</service>
+				   <method>exec</method>
+				   <param>liremail( "<star index="2"/>" )</param>
+				 </mrl>
+			</oob>
+	</template>
+    </category>
+	<category>	
+	<pattern># le message de *</pattern>
+		<template>
+			<srai># LES MESSAGES DE *</srai>
+		</template>
+	</category>	
+	<category>	
+	<pattern># les mails de *</pattern>
+		<template>
+			<srai># LES MESSAGES DE *</srai>
+		</template>
+	</category>
+	<category>	
+	<pattern># le mail de *</pattern>
+		<template>
+			<srai># LES MESSAGES DE *</srai>
+		</template>
+	</category>
+
+	<category>
+      <pattern>ENVOYER UN MAIL À *</pattern>
+      <template>
+		<think><set name="destinataire"><star/></set></think>
+			<oob>
+				<mrl>
+				   <service>python</service>
+				   <method>exec</method>
+				   <param>mailsend("<get name="destinataire"/>")</param>
+				 </mrl>
+			</oob>
+	</template>
+    </category>	
+	<category><pattern>SYSMAIL</pattern>
+	<template>
+		<think><set name="message"><star/></set></think>Je t'écoute quel message court veux-tu envoyer  </template>
+	</category> 
+	
+	<category><pattern>*</pattern>
+		<that># quel message court veux-tu envoyer #</that>
+	<template>
+		<oob>
+		<mrl>
+		   <service>python</service>
+		   <method>exec</method>
+		   <param>envoi( "<star index="1"/>")</param>
+		 </mrl>
+		</oob>
+	</template>
+	</category>  	
+	
+</aiml>

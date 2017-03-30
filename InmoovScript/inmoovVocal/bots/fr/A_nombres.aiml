@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+   
+  <category>
+    <pattern> # tables de multiplication</pattern>
+    <template>oui , je suis aller au college , interroge moi </template>
+  </category>
+   <category>
+    <pattern> # compter</pattern>
+    <template>bien sur ,  interroge moi </template>
+  </category> 
+  
+  <category>
+    <pattern>* X *</pattern>
+    <template>
+	<javascript>
+		myMath = eval( <star index="1" /> * <star index="2" /> );
+		myMath;
+	</javascript>      
+    </template>
+  </category>
+  
+  
+  <category>
+    <pattern>* + *</pattern>
+    <template>
+      <javascript>
+		myMath = eval( <star index="1" /> + <star index="2" /> );
+		myMath;
+	</javascript>
+    </template>
+  </category>
+  
+ 
+    <category>
+    <pattern>* - *</pattern>
+    <template>
+	<javascript>
+		myMath = eval( <star index="1" /> - <star index="2" /> );
+		myMath;
+	</javascript>
+	</template> 
+  </category>
+  
+
+   <category>
+    <pattern>* / *</pattern>
+    <template>
+    <javascript>
+		myMath = eval( <star index="1" /> / <star index="2" /> );
+		myMath = myMath*100;
+		myMath = Math.round(myMath);
+		myMath = myMath/100;
+		myMath;
+    </javascript>
+    </template>
+  </category>
+  
+  <category>
+    <pattern>* pour cent de * </pattern>
+    <template>
+    <javascript>
+		myMath = eval( <star index="1" /> * <star index="2" /> / 100);
+		myMath;
+    </javascript>
+    </template>
+  </category>
+    <category>
+    <pattern> * * de *</pattern>
+    <template>
+    <javascript>
+		myMath = eval( <star index="1" /> * <star index="3" /> / 100);
+		myMath;
+    </javascript>
+    </template>
+  </category>
+ 
+</aiml>
