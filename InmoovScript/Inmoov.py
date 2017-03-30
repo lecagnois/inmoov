@@ -5,10 +5,10 @@
 ##						    \ \  \ \  \\ \  \ \  \    \ \  \ \  \\\  \ \  \\\  \ \    / /  
 ##						     \ \__\ \__\\ \__\ \__\    \ \__\ \_______\ \_______\ \__/ /   
 ##						      \|__|\|__| \|__|\|__|     \|__|\|_______|\|_______|\|__|/    script - [wip]
-version='0.1.3'
+version='0.3.2'
 
 # this will run with versions of MRL above :
-mrlCompatible='1861'
+mrlCompatible='1954'
 
 # ###################################################################################
 # This is a very minimal script for Inmoov
@@ -42,39 +42,8 @@ i01 = Runtime.createAndStart("i01", "InMoov")
 # robot checkup and initialisation ( skeleton & services)
 RuningFolder="InmoovScript"
 execfile(RuningFolder+'/system/InitCheckup.py')
-
-
-
-
-# ###################################################################################
-# SAMPLE COMMANDS 
-# Go further you can find more vocal commands into inmoovVocal/ear.addCommand
-# Go further you can find more associated functions into inmoovGestures
-# ###################################################################################
-
-ear.addCommand("attach your finger", "i01.rightHand.index", "attach") #to remove soon
-ear.addCommand("disconnect your finger", "i01.rightHand.index", "detach")
-ear.addCommand("open your finger", "python", "fingeropen")
-ear.addCommand("close your finger", "python", "fingerclose")
-ear.addCommand("finger to the middle", "python", "fingermiddle")
-
-# functions called by the vocal commands
-def fingeropen():
-  i01.moveHand("right",0,0,0,0,0)
-  talkBlocking("ok I open my finger")
-
-def fingerclose():
-  i01.moveHand("right",180,180,180,180,180)
-  talkBlocking("my finger is closed")
-
-def fingermiddle():
-  i01.moveHand("right",90,90,90,90,90)
-  talkBlocking("ok you have my attention")
-  
-  
   
 
 ##############
-#Go more further ! and code your own script in a separated file
+#Go more further ! and code your own script in this file
 execfile(RuningFolder+'inmoovCustom/Inmoov_custom.py')
-
