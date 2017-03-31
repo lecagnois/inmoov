@@ -14,16 +14,15 @@ def HealthCheck_def(timedata):
 	#### modif JPM
 	minute = str(timedata)[14:16]
 	heure = str(timedata)[11:13]
+	# donne l heure avec humour 
 	if minute =="00" :
 		#talkBlocking("il est exactement "+heure+" heure")
-		Mheure = random.randint(1,5)
-		Mheure2 = (str(Mheure)+".mp3")
-		AudioPlayer.playFile(RuningFolder+'/system/sounds/heure/'+heure+'/'+Mheure2)
+		Mheure = (str(random.randint(1,5))+".mp3")
+		AudioPlayer.playFile(RuningFolder+'/system/sounds/heure/'+heure+'/'+Mheure)
 		
 	## lance une humeur au hasard	
 	if minute=="08" or minute=="16" or minute=="24" or minute=="33" or minute=="41"or minute=="51":
-		nbsurprise = random.randint(1,305)
-		surprise = (str(nbsurprise)+".mp3")
+		surprise = (str(random.randint(1,305))+".mp3")
 		AudioPlayer.playFile(RuningFolder+'/system/sounds/surprise/'+surprise)
 	######### fin modif JPM
 
